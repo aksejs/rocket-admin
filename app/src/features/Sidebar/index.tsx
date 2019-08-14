@@ -1,0 +1,1 @@
+// export { SideBarView } from './view';
