@@ -20,7 +20,8 @@ module.exports = {
   output: {
     path: outPath,
     filename: isProduction ? '[contenthash].js' : '[hash].js',
-    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
+    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
+    publicPath: '/'
   },
   target: 'web',
   resolve: {
@@ -29,10 +30,11 @@ module.exports = {
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
     alias: {
-      app: path.resolve(__dirname, 'app/src/'),
-      "@styles": path.resolve(__dirname, 'app/styles/'),
-      "@features": path.resolve(__dirname, "app/src/features/"),
-      "@assets": path.resolve(__dirname, 'app/assets/')
+      "app": path.resolve(__dirname, 'app/src/'),
+      "@styles": path.resolve(__dirname, 'app/src/styles/'),
+      "@features": path.resolve(__dirname, 'app/src/features/'),
+      "@assets": path.resolve(__dirname, 'app/assets/'),
+      "@api": path.resolve(__dirname, 'app/src/api/')
     }
   },
   module: {
@@ -116,9 +118,7 @@ module.exports = {
     contentBase: sourcePath,
     hot: true,
     inline: true,
-    historyApiFallback: {
-      disableDotRule: true
-    },
+    historyApiFallback: true,
     proxy: {
       '/api': {
           target: 'http://localhost:8080'
@@ -126,7 +126,7 @@ module.exports = {
     },
     stats: 'minimal',
     host: 'localhost',
-    port: '9000',
+    port: '4000',
     clientLogLevel: 'warning'
   },
   // https://webpack.js.org/configuration/devtool/
