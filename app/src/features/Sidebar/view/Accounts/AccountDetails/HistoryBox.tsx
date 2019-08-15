@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { convertUnixTime } from 'app/utils';
 import { HistoryDetail } from '@features/Sidebar/types';
 import { 
@@ -11,26 +12,48 @@ import {
     ChatIcon
 } from './styles';
 
-const HistoryBox: React.FC<HistoryDetail> = ({ 
+interface HistoryBoxProps extends HistoryDetail {
+  socket?:any
+}
+
+const HistoryBox: React.FC<HistoryBoxProps> = ({ 
     amount, 
     carriedOut, 
-    type, 
-    positive 
+    name, 
+    positive,
+    operationCode,
+    socket 
 }) => {
   const lastCarriedOutDate = convertUnixTime(carriedOut);
+  const handleSendMessage = () => {
+    socket.emit('message to server', {
+      isClient: false,
+      message: amount,
+      timeStamp: new Date().getTime() / 1000 | 0,
+      type: "operation",
+      operationDetails: {
+        name: name,
+        positive: positive,
+        amount: amount,
+        operationCode: operationCode
+      }
+    })
+  }
   return (
     <HistoryBoxWrapper>
       <BoxContentWrapper>
-        <CompanyLogo src="../../assets/img/company-logos/merchant-dixi@2x.png"/>
+        <CompanyLogo src={`../../assets/img/company-logos/merchant-${operationCode}@2x.png`}/>
         <BoxDescription>
-            <p>{type}</p>
+            <p>{name}</p>
             <DescriptionText>{lastCarriedOutDate}</DescriptionText>
         </BoxDescription>
       </BoxContentWrapper>
       <Amount>{positive ? '+' : '-'}{amount} ₽</Amount>
-      <ChatIcon />
+      <ChatIcon onClick={handleSendMessage} />
     </HistoryBoxWrapper>
   );
 };
 
-export default HistoryBox;
+export default connect((state) => ({
+  socket: state.frontState.socket
+}))(HistoryBox);

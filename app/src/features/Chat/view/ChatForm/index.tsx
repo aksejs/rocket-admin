@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { Wrapper, StyledForm, StyledInput, SendButton } from './styles';
+import Controlls from './Controlls';
+import { Wrapper, StyledForm, StyledInput, SendButton, InputsWrapper } from './styles';
 
 import SendIcon from '@assets/svg/ico-send.svg';
+import { connect } from 'react-redux';
+
 
 interface IState {
 	value: string;
 }
 
-export default class ChatForm extends React.Component<any, IState> {
+class ChatForm extends React.Component<any, IState> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -17,7 +20,8 @@ export default class ChatForm extends React.Component<any, IState> {
 
 	handleSumbit = (event: any) => {
 		event.preventDefault();
-		this.props.sendMessage({
+		const { socket } = this.props;
+		socket.emit('message to server', {
 			isClient: false,
 			message: this.state.value,
 			timestamp: new Date().getTime() / 1000 | 0
@@ -33,12 +37,15 @@ export default class ChatForm extends React.Component<any, IState> {
 		return (
 			<Wrapper>
 				<StyledForm>
-					<StyledInput
-						type="text"
-						value={this.state.value}
-						onChange={this.handleChangeValue}
-						placeholder="Введите сообщение..."
-					/>
+					<InputsWrapper>
+						<Controlls />
+						<StyledInput
+							type="text"
+							value={this.state.value}
+							onChange={this.handleChangeValue}
+							placeholder="Введите сообщение..."
+						/>
+					</InputsWrapper>
 					<SendButton onClick={this.handleSumbit}>
 						<SendIcon />
 					</SendButton>
@@ -47,3 +54,7 @@ export default class ChatForm extends React.Component<any, IState> {
 		);
 	}
 }
+
+export default connect((state) => ({
+	socket: state.frontState.socket
+}))(ChatForm)

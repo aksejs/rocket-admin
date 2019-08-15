@@ -35,6 +35,12 @@
         "type": "message",
         "timestamp": 1493690200,
         "message": "А, все само заработало лол"
+      },
+      {
+        "isClient": true,
+        "type": "message",
+        "timestamp": 1493690300,
+        "message": "Привет, опять проблемка, ты тут?"
       }
     ]
   }
