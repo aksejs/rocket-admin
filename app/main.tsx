@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { configureStore, history } from 'app/store';
 import App from './src/App';
 
-import { colors } from '@styles/variables';
+import { colors } from '@styles/variables/colors';
 import { ResetStyle } from '@styles/base/reset';
 import { GeneralStyle } from '@styles/base/general';
 

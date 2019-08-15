@@ -1,59 +1,68 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Wrapper, Tabs, Tab } from './styles';
-import { getDepositsList, getAccountsList } from 'app/utils/requests';
+import { getDepositsList, getAccountsList } from '@api/requests';
 import { setDeposits, setAccounts } from '@features/Sidebar/actions';
-import AccountBox from './AccountBox';
+import AccountBox from './Accounts/AccountBox';
+import AccountDetails from './Accounts/AccountDetails';
 
 class SidebarView extends React.Component<any> {
+  componentDidMount = () => {
+    getDepositsList().then(({ data: { deposits } }) => this.props.dispatch(setDeposits(deposits)));
 
-    componentDidMount = () => {
-        getDepositsList()
-            .then(({ data: { deposits } }) => this.props.dispatch(setDeposits(deposits)))
+    getAccountsList().then(({ data: { accounts } }) => this.props.dispatch(setAccounts(accounts)));
+  };
 
-        getAccountsList()
-            .then(({ data: { accounts } }) => this.props.dispatch(setAccounts(accounts)))
+  renderTabs = () => {
+    return (
+      <Tabs>
+        <Tab to="/chat/accounts">Счета</Tab>
+        <Tab to="/">Вклады</Tab>
+      </Tabs>
+    );
+  };
+
+  renderAccountsList = () => {
+    const { accounts } = this.props;
+
+    if (!accounts.length) {
+      return null;
     }
 
-    renderAccountsList = () => {
-        const { accounts } = this.props;
+    return accounts.map(({ number, balance, currency, annual, created, last_operation }: any) => (
+      <AccountBox
+        key={number}
+        number={number}
+        balance={balance}
+        currency={currency}
+        annual={annual}
+        created={created}
+        last_operation={last_operation}
+      />
+    ));
+  };
 
-        if (!accounts.length) {
-            return null
-        }
+  render() {
+    return (
+      <Wrapper>
+        {this.renderTabs()}
+        <Switch>
+          <Route path="/chat/accounts/:productId" component={AccountDetails} />
+          <Route path="/chat/accounts/" render={this.renderAccountsList} />
 
-        return accounts.map(({ 
-            number, 
-            balance, 
-            currency, 
-            annual, 
-            created, 
-            last_operation }: any) => (
-                <AccountBox 
-                    key={number}
-                    number={number} 
-                    balance={balance}
-                    currency={currency}
-                    annual={annual}
-                    created={created} 
-                    last_operation={last_operation} />)
-        );
-    }
+          {/* <Route path="/chat/deposits/:productId" render={this.renderDepositDetails} />
+          <Route path="/chat/deposits/" render={this.renderDeposits} /> */}
 
-    render() {
-        return (
-            <Wrapper>
-                <Tabs>
-                    <Tab to="/chat/accounts/">Счета</Tab>
-                    <Tab to="/">Вклады</Tab>
-                </Tabs>
-                {this.renderAccountsList()}
-            </Wrapper>
-        )
-    }
-};
+          <Redirect from="*" to="/chat/" />
+        </Switch>
+      </Wrapper>
+    );
+  }
+}
 
-export default connect(({ controlPanel }) => ({
-    accounts: controlPanel.accounts,
-    deposits: controlPanel.deposits
+export default connect((state) => ({
+  accounts: state.controlPanel.accounts,
+  deposits: state.controlPanel.deposits,
+  router: state.router
 }))(SidebarView);

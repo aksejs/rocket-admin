@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import IconAccount from '@assets/svg/pic-account-1.svg';
+import IconExpand from '@assets/svg/ico-disclosure.svg';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -9,12 +10,8 @@ export const Wrapper = styled.div`
 export const InfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    position: relative;
 `;
-
-export const StyledIcon = styled(IconAccount)`
-    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.2);
-    margin: 0 20px 0 0;
-`; 
 
 export const AccountNumber = styled.p`
     font-size: 14px;
@@ -23,7 +20,6 @@ export const AccountNumber = styled.p`
 
 export const Amount = styled.p`
     font-size: 14px;
-    font-weight: bold;
 `;
 
 export const DescriptionBlock = styled.div`
@@ -41,4 +37,15 @@ export const DescriptionText = styled.div`
 export const StyledAmount = styled.span`
     font-weight: bold;
     color: ${({ theme }) => theme.dark};
+`;
+
+export const StyledIcon = styled(IconAccount)`
+    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.2);
+    margin: 0 20px 0 0;
+`; 
+
+export const StyledExpand = styled(IconExpand)`
+    position: absolute;
+    top: 0;
+    right: 0;
 `;

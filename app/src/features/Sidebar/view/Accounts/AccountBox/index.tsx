@@ -1,4 +1,6 @@
 import * as React from 'react';
+import LastOperation from './LastOperation';
+import { Link } from 'react-router-dom';
 import { Account } from '@features/Sidebar/types';
 import { toSpaced, convertUnixTime } from 'app/utils';
 import { 
@@ -8,8 +10,8 @@ import {
     Amount,
     DescriptionBlock,
     DescriptionText,
-    StyledAmount,
-    StyledIcon
+    StyledIcon,
+    StyledExpand
 } from './styles';
 
 const AccountBox: React.FC<Account> = ({ 
@@ -18,16 +20,11 @@ const AccountBox: React.FC<Account> = ({
     currency,
     annual,
     created,
-    last_operation: {
-        carriedOut,
-        amount,
-        positive
-    }
+    last_operation
 }) => {
     const spacedBalance = toSpaced(Math.round(balance).toString());
-    const spacedAmount = toSpaced(Math.round(amount).toString());
     const createdDate = convertUnixTime(created);
-    const lastCarriedOutDate = convertUnixTime(carriedOut);
+    const isShowLastOperation = last_operation;
     return (
         <Wrapper>
             <StyledIcon />
@@ -40,10 +37,19 @@ const AccountBox: React.FC<Account> = ({
                     <DescriptionText>
                         {annual}% годовых<br/>
                         Создан: {createdDate}<br/>
-                        Последняя операция:<br/>
-                        {lastCarriedOutDate} (<StyledAmount>{positive ? '+' : '-'} {spacedAmount} {currency}</StyledAmount>)
                     </DescriptionText>
+                    {last_operation && 
+                        <LastOperation 
+                            lastOperation={last_operation} 
+                            currency={currency}
+                        />
+                    }
                 </DescriptionBlock>
+                { isShowLastOperation && 
+                    <Link to={`/chat/accounts/${number}`}>
+                        <StyledExpand />
+                    </Link>
+                }
             </InfoWrapper>
         </Wrapper>
     );

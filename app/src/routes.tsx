@@ -8,6 +8,7 @@ const routes = (
     <Switch>
       <Route exact path="/" component={MainPage} />
       <Route path="/chat/:type" render={(props) => <Chat props={props} />} />
+      
       <Redirect from="/chat" to="/chat/accounts" />
       <Redirect from="*" to="/" />
     </Switch>
