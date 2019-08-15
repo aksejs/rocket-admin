@@ -41,3 +41,8 @@ export const SendButton = styled.button`
     padding: 0;
     cursor: pointer;
 `;
+
+export const InputsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;

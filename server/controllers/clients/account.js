@@ -2,16 +2,24 @@ const { random } = require('lodash');
 const currencySymbols = ['₽', '$', '€'];
 const operationTypes = [
   {
-    name: 'top_up',
+    name: 'Пополнение с карты',
     positive: true,
+    operation_code: 'replenish'
   },
   {
-    name: 'percent',
+    name: 'Выплата процентов',
     positive: true,
+    operation_code: 'percents'
   },
   {
-    name: 'charge_off',
+    name: 'Макдональдс',
     positive: false,
+    operation_code: 'mcdonalds'
+  },
+  {
+    name: 'Дикси',
+    positive: false,
+    operation_code: 'dixi'
   }
 ];
 
@@ -39,18 +47,19 @@ const makeHistoryStubs = () => {
     const carriedOut = random(created, created + random(20000, 333333));
     const lastCartNumber = random(1111, 9999);
     const amount = random(10.00, 20000.99).toFixed(2);
-    const type = operationTypes[random(0, 2)];
+    const type = operationTypes[random(0, 3)];
 
     return {
       amount: parseFloat(amount),
       carriedOut: parseInt(carriedOut),
       lastCartNumber: String(lastCartNumber),
       positive: type.positive,
-      type: type.name,
+      name: type.name,
+      operationCode: type.operation_code 
     };
   };
 
-  const length = random(10, 50);
+  const length = random(10, 20);
   const data = new Array(length).fill(null);
 
   return data.map(generate);

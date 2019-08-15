@@ -52,7 +52,7 @@ class AccountDetails extends React.Component<MatchProps, IState> {
           <HistoryWrapper>
               <HistoryTitle>История операций</HistoryTitle>
               {history.map((historyDetail: HistoryDetail) => (
-                  <HistoryBox {...historyDetail}/>
+                  <HistoryBox key={historyDetail.carriedOut} {...historyDetail}/>
               ))}
           </HistoryWrapper>
         </Wrapper>

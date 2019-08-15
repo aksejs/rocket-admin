@@ -44,7 +44,8 @@ export interface HistoryDetail {
     carriedOut: number
     lastCartNumber: string
     positive: boolean
-    type: string
+    name: string
+    operationCode: string
 };
 export interface GetAccountResponseTypes {
     account: Account,
