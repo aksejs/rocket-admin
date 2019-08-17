@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import { ControlPannelActionTypes, Deposit, Account } from './types';
+import { ControlPannelActionTypes, Deposit, Account } from '../types';
 
 
 export const setDeposits = (data: Deposit[]) => action(ControlPannelActionTypes.GET_DEPOSITS, data);

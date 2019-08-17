@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Wrapper, Tabs, Tab } from './styles';
-import { getDepositsList, getAccountsList } from '@api/requests';
-import { setDeposits, setAccounts } from '@features/Sidebar/actions';
 import AccountBox from './Accounts/AccountBox';
 import AccountDetails from './Accounts/AccountDetails';
+import { Wrapper, Tabs, Tab } from './styles';
+import { getDepositsList, getAccountsList } from '@api/requests';
+import { setDeposits, setAccounts } from '@features/Sidebar/controllers/actions';
 
 class SidebarView extends React.Component<any> {
   componentDidMount = () => {
@@ -17,8 +17,8 @@ class SidebarView extends React.Component<any> {
   renderTabs = () => {
     return (
       <Tabs>
-        <Tab to="/chat/accounts">Счета</Tab>
-        <Tab to="/">Вклады</Tab>
+        <Tab strict to="/chat/accounts">Счета</Tab>
+        <Tab to="/chat/deposits">Вклады</Tab>
       </Tabs>
     );
   };

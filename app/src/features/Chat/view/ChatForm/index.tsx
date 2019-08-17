@@ -5,7 +5,6 @@ import { Wrapper, StyledForm, StyledInput, SendButton, InputsWrapper } from './s
 import SendIcon from '@assets/svg/ico-send.svg';
 import { connect } from 'react-redux';
 
-
 interface IState {
 	value: string;
 }
@@ -24,7 +23,8 @@ class ChatForm extends React.Component<any, IState> {
 		socket.emit('message to server', {
 			isClient: false,
 			message: this.state.value,
-			timestamp: new Date().getTime() / 1000 | 0
+			timestamp: new Date().getTime() / 1000 | 0,
+			type: 'message'
 		})
 		this.setState({ value: '' });
 	};

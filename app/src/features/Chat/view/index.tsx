@@ -20,8 +20,7 @@ class ChatView extends React.Component<any> {
                     dispatch={this.props.dispatch} 
                     messages={this.props.messages} 
                 />
-                <ChatForm 
-                />
+                <ChatForm />
             </Wrapper>
         )
     }

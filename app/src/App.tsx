@@ -1,10 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import io from 'socket.io-client';
 // import { History } from 'history';
+import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import routes from './routes';
 import { setSocket, loadInitialMessages, initializeSockets } from 'app/main/actions';
+import routes from './routes';
+import { SOCKET_URL } from 'app/utils/constants';
 
 let socket: any;
 class App extends React.Component<any> {
@@ -16,13 +17,15 @@ class App extends React.Component<any> {
       chat: { messages }, 
       persist: { rehydrated = false }
     } = this.props;
+    
     const isMessagesRehydrated = rehydrated && messages.length;
-    socket = io.connect('http://localhost:8081');
+
+    socket = io.connect(SOCKET_URL);
     setSocket(socket);
     initializeSockets(socket);
     if (!isMessagesRehydrated) {
-    loadInitialMessages(socket);
-    }
+      loadInitialMessages(socket);
+    };
   }
 
   componentWillUnmount() {

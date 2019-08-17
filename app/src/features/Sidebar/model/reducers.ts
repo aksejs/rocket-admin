@@ -1,7 +1,7 @@
 // ./src/store/heroes/reducer.ts
 
 import { Reducer } from 'redux'
-import { ControlPanelState, ControlPannelActionTypes } from './types'
+import { ControlPanelState, ControlPannelActionTypes } from '../types'
 
 // Type-safe initialState!
 const initialState: ControlPanelState = {

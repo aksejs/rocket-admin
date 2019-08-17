@@ -3,7 +3,8 @@ export interface MessageType {
     message?: string,
     timestamp: number,
     type: string,
-    operationDetails?: OperationDetails
+    operationDetails?: OperationDetails,
+    stickerIndex?: number;
 };
 
 export interface OperationDetails {
@@ -22,6 +23,6 @@ export interface ChatState {
 };
 
 export enum ChatActionTypes {
-    FETCH_MESSAGES = '@@CHAT/FETCH_MESSAGES',
-    SET_NEW_MESSAGE = '@@CHAT/SET_NEW_MESSAGE'
+    FETCH_MESSAGES = '@CHAT/FETCH_MESSAGES',
+    SET_NEW_MESSAGE = '@CHAT/SET_NEW_MESSAGE'
 };

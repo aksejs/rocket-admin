@@ -1,5 +1,6 @@
 {
   "events": {
+    "start": "kill $(lsof -t -i:8081)",
     "restart": "kill $(lsof -t -i:8081)",
     "crash": "kill $(lsof -t -i:8081)"
   },

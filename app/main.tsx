@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import styled, { ThemeProvider } from 'styled-components';
-import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';
-import { configureStore, history } from 'app/store';
 import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import styled, { ThemeProvider } from 'styled-components';
 import App from './src/App';
+import { configureStore, history } from 'app/store';
 
 import { colors } from '@styles/variables/colors';
 import { ResetStyle } from '@styles/base/reset';
@@ -30,7 +30,6 @@ const RootWrapper = styled.div`
   flex-direction: column;
 `;
 
-// prepare store
 let store = configureStore();
 let persistor = persistStore(store);
 
