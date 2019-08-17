@@ -8,6 +8,7 @@ import { getDepositsList, getAccountsList } from '@api/requests';
 import { setDeposits, setAccounts } from '@features/Sidebar/controllers/actions';
 
 class SidebarView extends React.Component<any> {
+  
   componentDidMount = () => {
     getDepositsList().then(({ data: { deposits } }) => this.props.dispatch(setDeposits(deposits)));
 

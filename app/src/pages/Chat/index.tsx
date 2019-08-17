@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ChatView from '@features/Chat/view';
+import { ChatView } from '@features/Chat';
 import SideBarView from '@features/Sidebar/view';
 import { Wrapper } from './styles';
 
