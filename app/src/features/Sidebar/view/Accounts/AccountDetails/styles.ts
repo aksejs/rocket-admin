@@ -32,7 +32,7 @@ export const HistoryBoxWrapper = styled.div`
     justify-content: space-between;
     padding: 15px 40px 15px 15px;
     margin-left: -15px;
-    width: 325px;
+    width: 27vw;
     transition: background-color 0.5s ease;
     cursor: default;
     position: relative;

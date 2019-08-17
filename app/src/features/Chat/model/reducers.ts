@@ -1,7 +1,7 @@
 // ./src/store/heroes/reducer.ts
 
 import { Reducer } from 'redux'
-import { ChatState, ChatActionTypes } from './types'
+import { ChatState, ChatActionTypes } from '../types'
 
 // Type-safe initialState!
 const initialState: ChatState = {

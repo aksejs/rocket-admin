@@ -36,4 +36,5 @@ export const StickersPlateWrapper = styled.div`
 export const StyledSticker = styled.img`
     width: 60px;
     height: 60px;
+    cursor: pointer;
 `;

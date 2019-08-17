@@ -20,10 +20,10 @@ export const Tabs = styled.div`
 
 export const Tab = styled(NavLink)`
     margin-right: 30px;
-    color: ${({ theme }) => theme.dark};
+    color: ${({ theme }) => theme.spanish_gray(1)};
     cursor: default;
     &.active {
-        color: ${({ theme }) => theme.spanish_gray(1)};
+        color: ${({ theme }) => theme.dark};
         cursor: pointer;
     }
 `;

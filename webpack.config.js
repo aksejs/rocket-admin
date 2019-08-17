@@ -1,16 +1,18 @@
-var webpack = require('webpack');
-var path = require('path');
-var package = require('./package.json');
+const webpack = require('webpack');
+const path = require('path');
+const package = require('./package.json');
 
 // variables
-var isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
-var sourcePath = path.join(__dirname, './app');
-var outPath = path.join(__dirname, './build');
+const isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
+const sourcePath = path.join(__dirname, './app');
+const outPath = path.join(__dirname, './build');
 
 // plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
   context: sourcePath,
@@ -85,6 +87,7 @@ module.exports = {
     runtimeChunk: true
   },
   plugins: [
+    new Dotenv(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false

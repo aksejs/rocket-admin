@@ -5,8 +5,10 @@ const app = express();
 const socketIO = require('socket.io');
 const messages = require('./messages.json');
 
-const port = process.env.PORT || 8080;
-const socketPort = 8081;
+require('dotenv').config();
+
+const port = process.env.API_PORT;
+const socketPort = process.env.SOCKET_PORT;
 const io = socketIO.listen(socketPort);
 
 io.on('connection', (socket) => {
@@ -15,6 +17,15 @@ io.on('connection', (socket) => {
   });
   socket.on('message to server', (message) => {
     io.sockets.emit('msg to client', message);
+
+    if (message.message === 'Привет') {
+      setTimeout(() => io.sockets.emit('msg to client', {
+        isClient: true,
+        type: "message",
+        timestamp: new Date().getTime() / 1000 | 0,
+        message: "Привет, опять проблемка, ты тут?"
+      }, 2000));
+    }
   });
 })
 

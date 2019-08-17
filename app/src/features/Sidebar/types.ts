@@ -35,8 +35,8 @@ export interface ControlPanelState {
 };
 
 export enum ControlPannelActionTypes {
-    GET_DEPOSITS = '@@CP/GET_DEPOSITS',
-    SET_ACCOUNTS = '@@CP/SET_ACCOUNTS'
+    GET_DEPOSITS = '@CP/GET_DEPOSITS',
+    SET_ACCOUNTS = '@CP/SET_ACCOUNTS'
 };
 
 export interface HistoryDetail {
