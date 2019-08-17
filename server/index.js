@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
         type: "message",
         timestamp: new Date().getTime() / 1000 | 0,
         message: "Привет, опять проблемка, ты тут?"
-      }, 2000));
+      }), 5000);
     }
   });
 })

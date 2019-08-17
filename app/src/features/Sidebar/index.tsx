@@ -1,1 +1,1 @@
-// export { SideBarView } from './view';
+// export default SideBarView from './view';
