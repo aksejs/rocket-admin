@@ -37,10 +37,10 @@
         "message": "А, все само заработало лол"
       },
       {
-        "isClient": true,
-        "type": "message",
-        "timestamp": 1493690300,
-        "message": "Привет, опять проблемка, ты тут?"
+        "isClient": false,
+        "type": "sticker",
+        "timestamp": 1493695200,
+        "stickerIndex": 8
       }
     ]
   }
