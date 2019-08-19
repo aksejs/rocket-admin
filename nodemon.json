@@ -1,8 +1,8 @@
 {
   "events": {
-    "start": "kill $(lsof -t -i:8081)",
-    "restart": "kill $(lsof -t -i:8081)",
-    "crash": "kill $(lsof -t -i:8081)"
+    "start": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)",
+    "restart": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)",
+    "crash": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)"
   },
   "delay": "1500"
 }
