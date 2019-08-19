@@ -10,16 +10,7 @@ export const colors = {
   
     jet: (opacity = 1) =>
       `rgba(51, 51, 51, ${opacity})`, // #333333
-  
-    maximum_red: (opacity = 1) =>
-      `rgba(222, 28, 40, ${opacity})`, // #DE1C28
-  
-    harlequin_green: (opacity = 1) =>
-      `rgba(110, 206, 26, ${opacity})`, // #6ECE1A
-  
-    blue_jeans: (opacity = 1) =>
-      `rgba(82, 175, 241, ${opacity})`, // #52AFF1
-  
+
     spanish_gray: (opacity = 1) =>
       `rgba(153, 153, 153, ${opacity})`, // #999999
   

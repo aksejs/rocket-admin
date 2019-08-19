@@ -1,22 +1,14 @@
 import { Reducer } from 'redux'
+import { handleActions } from 'redux-actions';
 import { ChatState, ChatActionTypes } from '../types'
 
 const initialState: ChatState = {
   messages: []
 }
 
-const reducer: Reducer<ChatState> = (state = initialState, action) => {
-  switch (action.type) {
-    case ChatActionTypes.FETCH_MESSAGES: {
-      return { ...state, messages: action.payload }
-    }
-    case ChatActionTypes.SET_NEW_MESSAGE: {
-      return { ...state, messages: [...state.messages, action.payload]}
-    }
-    default: {
-      return state
-    }
-  }
-}
+const reducer: Reducer<ChatState> = handleActions<any, any>({
+  [ChatActionTypes.FETCH_MESSAGES]: (state, { payload }) => ({ ...state, messages: payload }),
+  [ChatActionTypes.SET_NEW_MESSAGE]: (state, { payload }) => ({ ...state, messages: [...state.messages, payload]})
+}, initialState)
 
 export { reducer as chatReducer };
