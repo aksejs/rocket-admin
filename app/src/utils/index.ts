@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import { HistoryDetail } from '@features/Sidebar/types';
 
 export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys: K[]): Omit<T, K> {
   return (Object.keys(target) as K[]).reduce(
@@ -12,6 +13,10 @@ export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys
   );
 }
 
+export const sortByDate = (details: Array<HistoryDetail>) => {
+	return details.sort((a, b) => b.carriedOut - a.carriedOut)
+};
+
 export function toSpaced(value: string) {
   return value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
@@ -20,12 +25,6 @@ export function convertUnixTime(UNIXtimestamp: number, locale: string = 'ru-RU')
   const a = new Date(UNIXtimestamp * 1000);
   return a.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric'});
 };
-
-// export const prepareOperationType = (operationType: string) => {
-//   switch(operationType) {
-//     case('')
-//   }
-// }
 
 /**
  * Debounce

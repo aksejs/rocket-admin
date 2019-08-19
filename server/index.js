@@ -25,26 +25,31 @@ io.on('connection', (socket) => {
       })}, 10300);
   });
   socket.on('message to server', (message) => {
-    if (message.type !== 'operation' && message.message.toLowerCase().includes('да') && messagePosition === 1) {
+    if (message.type === 'message' && message.message.toLowerCase().includes('проблема')) {
+      clearTimeout(greetingMessageTimerId);
+      messagePosition = 0;
+    }
+    if ((messagePosition === 0) || (message.type !== 'operation' && message.message.toLowerCase().includes('да') && messagePosition === 1)) {
       setTimeout(() => {
         io.sockets.emit('msg to client', {
           isClient: true,
           type: 'message',
-          message: "В общем проблема такая, не могу понять какая у меня последняя опреация.",
+          message: "В общем проблема такая, не могу найти на сколько я последний раз поел в маке..",
           timestamp: new Date().getTime() / 1000 | 0
         })
         messagePosition = 2;
-      }, 3000);
+      }, 6000);
     }
     if (message.type === 'operation' && messagePosition === 2) {
-      if (message.operationDetails.name === 'Дикси') {
+      if (message.operationDetails.name === 'Макдональдс') {
         setTimeout(() => {
           io.sockets.emit('msg to client', {
             isClient: true,
             type: 'message',
-            message: "А, точно, спасибо)",
+            message: "Ничего себе, спасибо!",
             timestamp: new Date().getTime() / 1000 | 0
           })
+          messagePosition = 3;
         }, 3000);
       } else {
         setTimeout(() => {

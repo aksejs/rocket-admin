@@ -6,11 +6,10 @@
   "main": "App.js",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"webpack-dev-server --mode development --hot --color --open \" \"nodemon ./server\"",
     "build": "webpack -p --progress --colors",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
+    "prettier": "prettier --write \"app/**/*.{ts,tsx,css}\""
   },
   "license": "MIT",
   "devDependencies": {
@@ -87,7 +86,6 @@
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.3.2",
-    "thunk": "^0.0.1",
     "typesafe-actions": "^4.4.2"
   }
 }
