@@ -8,48 +8,38 @@ import StickerIcon from '@assets/svg/ico-sticker.svg';
 import PictureIcon from '@assets/svg/ico-picture.svg';
 import AttachIcon from '@assets/svg/ico-attach.svg';
 
-class Controlls extends React.Component<any, {isShowStickerPlate: boolean}> {
-  constructor(props:any) {
-      super(props);
-      this.state = {
-          isShowStickerPlate: false
-      };
-  }
-  onMouseEnterHandler = () => {
-      this.setState({ isShowStickerPlate: true })
+const Controlls: React.FC<any> = () => {
+  const [isShowStickerPlate, setShowStickerPlate] = React.useState<boolean>(false);
+  const onMouseEnterHandler = () => {
+    setShowStickerPlate(true);
   };
 
-  onMouseLeaveHandler = () => {
-    this.setState({ isShowStickerPlate: false })
+  const onMouseLeaveHandler = () => {
+    setShowStickerPlate(true)
   };
-  
-  renderStickersPlate = () => {
-      const { isShowStickerPlate } = this.state;
-      const stickers = [1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12];
-      return (
-        <StickersPlateWrapper 
-            isShow={isShowStickerPlate}
-            onMouseLeave={__.debounce(this.onMouseLeaveHandler, 200)}
-        >
-            {stickers.map((item) => (
-                <Sticker key={item} index={item.toString()} />
-            ))}
-        </StickersPlateWrapper>
-      );
-  }
-  render() {
+
+  const renderStickersPlate = () => {
+    const stickers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return (
-      <Wrapper>
-        {this.renderStickersPlate()}
-        <TextIcon />
-        <StickerIcon 
-            onMouseEnter={this.onMouseEnterHandler}
-        />
-        <PictureIcon />
-        <AttachIcon />
-      </Wrapper>
+      <StickersPlateWrapper
+        isShow={isShowStickerPlate}
+        onMouseLeave={__.debounce(onMouseLeaveHandler, 200)}
+      >
+        {stickers.map((item) => (
+          <Sticker key={item} index={item.toString()} />
+        ))}
+      </StickersPlateWrapper>
     );
-  }
-}
+  };
+  return (
+    <Wrapper>
+      {renderStickersPlate()}
+      <TextIcon />
+      <StickerIcon onMouseEnter={onMouseEnterHandler} />
+      <PictureIcon />
+      <AttachIcon />
+    </Wrapper>
+  );
+};
 
 export default Controlls;

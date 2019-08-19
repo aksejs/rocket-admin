@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LastOperationTypes } from '@features/Sidebar/types';
-import { toSpaced, convertUnixTime } from 'app/utils';
+import { toSpaced, convertUnixTime } from '@utils/helpers';
 import { DescriptionText, StyledAmount } from './styles';
 
 const LastOperation: React.FC<{

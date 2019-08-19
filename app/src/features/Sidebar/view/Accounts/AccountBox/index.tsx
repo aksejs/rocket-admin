@@ -2,7 +2,7 @@ import * as React from 'react';
 import LastOperation from './LastOperation';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
-import { toSpaced, convertUnixTime } from 'app/utils';
+import { toSpaced, convertUnixTime } from '@utils/helpers';
 import { 
     Wrapper,
     InfoWrapper, 

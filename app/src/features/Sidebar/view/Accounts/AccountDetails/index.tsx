@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { getAccount } from '@api/requests';
 import { Account, HistoryDetail } from '@features/Sidebar/types';
-import { sortByDate } from 'app/utils';
+import { sortByDate } from '@utils/helpers';
 import IconCross from '@assets/svg/ico-cross.svg';
 import AccountBox from '../AccountBox';
 import HistoryBox from './HistoryBox';
@@ -21,44 +21,37 @@ interface MatchParams {
 
 interface MatchProps extends RouteComponentProps<MatchParams> {}
 
-interface IState {
-  isLoaded: boolean;
-  account?: Account;
-  history?: HistoryDetail[];
-}
+interface initialState {
+  account: Account | {},
+  history: HistoryDetail[] | []
+};
 
-class AccountDetails extends React.Component<MatchProps, IState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      isLoaded: false
-    };
-  }
-  componentDidMount() {
-    const {
-      match: { params }
-    } = this.props;
+const AccountDetails: React.FC<MatchProps> = ({ 
+  match: { params }, 
+  history: { push }
+}) => {
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+  const [data, setData] = React.useState<initialState>({
+    account: {},
+    history: []
+  });
+  React.useEffect(() => {
     if (params.productId) {
       getAccount({ clientId: 1, productId: +params.productId, getAccount: true }).then(
         ({ data }) => {
-          this.setState({
-            account: data.account,
-            history: data.history,
-            isLoaded: true
-          });
-        }
-      );
+          setData(data);
+          setIsLoaded(true);
+        });
     }
-  }
-
-  renderAccountDetail = () => {
-    const { account, history } = this.state;
-    if (account && history) {
+  }, [])
+  const renderAccountDetail = () => {
+    const { account, history } = data;
+    if (account && history.length) {
       return (
         <>
           <CurrentAccountWrapper>
             <AccountBox {...account} />
-            <CircledIcon onClick={() => this.props.history.push('/chat/accounts/')}>
+            <CircledIcon onClick={() => push('/chat/accounts/')}>
               <IconCross />
             </CircledIcon>
           </CurrentAccountWrapper>
@@ -73,10 +66,7 @@ class AccountDetails extends React.Component<MatchProps, IState> {
     }
     return <div>Error</div>;
   };
-  render() {
-    const { isLoaded } = this.state;
-    return <Wrapper>{isLoaded ? this.renderAccountDetail() : <Loader />}</Wrapper>;
-  }
+  return <Wrapper>{isLoaded ? renderAccountDetail() : <Loader />}</Wrapper>;
 }
 
 export default AccountDetails;
