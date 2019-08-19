@@ -36,7 +36,9 @@ module.exports = {
       "@styles": path.resolve(__dirname, 'app/src/styles/'),
       "@features": path.resolve(__dirname, 'app/src/features/'),
       "@assets": path.resolve(__dirname, 'app/assets/'),
-      "@api": path.resolve(__dirname, 'app/src/api/')
+      "@api": path.resolve(__dirname, 'app/src/api/'),
+      "@utils": path.resolve(__dirname, 'app/src/utils/'),
+      "@common": path.resolve(__dirname, 'app/src/common/')
     }
   },
   module: {

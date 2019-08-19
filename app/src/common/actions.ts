@@ -1,7 +1,6 @@
 import { action } from 'typesafe-actions';
-import { FrontStateActionTypes } from './types';
 import { setMessages, setNewMessage } from '@features/Chat/controllers/actions';
-
+import { FrontStateActionTypes } from './types';
 
 export const setSocket = (data:any) => action(FrontStateActionTypes.SET_SOCKET, data);
 

@@ -2,10 +2,10 @@ import { Store, createStore, applyMiddleware } from 'redux';
 import { createBrowserHistory } from 'history'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'connected-react-router'
-import { ApplicationState, rootReducer } from 'app/common/reducers';
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
+import { ApplicationState, rootReducer } from '@common/reducers';
 
 export const history = createBrowserHistory();
 
@@ -29,8 +29,8 @@ export function configureStore(initialState?: ApplicationState): Store<Applicati
   >;
 
   if (module.hot) {
-    module.hot.accept('app/common/reducers', () => {
-      const nextReducer = require('app/common/reducers');
+    module.hot.accept('@common/reducers', () => {
+      const nextReducer = require('@common/reducers');
       store.replaceReducer(nextReducer);
     });
   }
