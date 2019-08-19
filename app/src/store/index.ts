@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router'
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
-import { ApplicationState, rootReducer } from '@common/reducers';
+import { ApplicationState, rootReducer } from 'app/common/rootReducer';
 
 export const history = createBrowserHistory();
 
@@ -29,8 +29,8 @@ export function configureStore(initialState?: ApplicationState): Store<Applicati
   >;
 
   if (module.hot) {
-    module.hot.accept('@common/reducers', () => {
-      const nextReducer = require('@common/reducers');
+    module.hot.accept('@common/rootReducer', () => {
+      const nextReducer = require('@common/rootReducer');
       store.replaceReducer(nextReducer);
     });
   }

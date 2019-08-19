@@ -5,8 +5,8 @@
   "description": "Test task for @RocketBank",
   "main": "App.js",
   "scripts": {
-    "client": "webpack-dev-server --mode development --hot",
-    "server": "nodemon ./server/index.js",
+    "client": "webpack-dev-server",
+    "server": "nodemon ./server",
     "dev": "concurrently -p \"[{name}]\" -n \"client,server\" -c \"bgMagenta.bold,bgBlue.bold\" \"yarn client\" \"yarn server\"",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"app/**/*.{ts,tsx,css}\""
@@ -32,6 +32,7 @@
     "express": "^4.17.1",
     "file-loader": "^3.0.1",
     "gh-pages": "^2.0.1",
+    "happypack": "^5.0.1",
     "html-loader": "^1.0.0-alpha.0",
     "html-webpack-plugin": "^4.0.0-alpha",
     "http": "^0.0.0",
@@ -58,7 +59,10 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
-    "webpack-logging-plugin": "^0.1.2"
+    "webpack-log": "^3.0.1",
+    "webpack-logger-plugin": "^1.2.0",
+    "webpack-logging-plugin": "^0.1.2",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -74,6 +78,7 @@
     "connected-react-router": "^6.5.2",
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
+    "kill-port": "^1.5.1",
     "ramda": "^0.26.1",
     "react": "^16.8.1",
     "react-content-loader": "^4.2.2",
