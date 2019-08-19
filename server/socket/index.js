@@ -15,6 +15,9 @@ const startSocketServer = ({ port }) => {
     socket.on('MESSAGE_INIT_HISTORY', () => {
       io.sockets.emit('MESSAGE_INIT_HISTORY', messages);
     });
+    socket.on('SET_SCENARIO', (position) => {
+      messagePosition = +position;
+    });
     socket.on('MESSAGE_TO_SERVER', (message) => {
       if (
         message.type === 'message' &&
