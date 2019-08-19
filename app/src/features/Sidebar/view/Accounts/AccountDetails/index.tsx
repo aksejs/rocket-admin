@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { getAccount } from '@api/requests';
 import { Account, HistoryDetail } from '@features/Sidebar/types';
+import { sortByDate } from 'app/utils';
 import IconCross from '@assets/svg/ico-cross.svg';
 import AccountBox from '../AccountBox';
 import HistoryBox from './HistoryBox';
@@ -63,7 +64,7 @@ class AccountDetails extends React.Component<MatchProps, IState> {
           </CurrentAccountWrapper>
           <HistoryWrapper>
             <HistoryTitle>История операций</HistoryTitle>
-            {history.map((historyDetail: HistoryDetail) => (
+            {sortByDate(history).map((historyDetail: HistoryDetail) => (
               <HistoryBox key={historyDetail.carriedOut} {...historyDetail} />
             ))}
           </HistoryWrapper>

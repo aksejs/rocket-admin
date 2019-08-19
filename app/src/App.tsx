@@ -10,14 +10,14 @@ import { SOCKET_URL } from 'app/utils/constants';
 let socket: any;
 class App extends React.Component<any> {
   componentDidMount() {
-    const { 
-      setSocket, 
-      loadInitialMessages, 
+    const {
+      setSocket,
+      loadInitialMessages,
       initializeSockets,
-      chat: { messages }, 
+      chat: { messages },
       persist: { rehydrated = false }
     } = this.props;
-    
+
     const isMessagesRehydrated = rehydrated && messages.length;
 
     socket = io.connect(SOCKET_URL);
@@ -39,7 +39,7 @@ class App extends React.Component<any> {
           {routes}
         </ConnectedRouter>
       </>
-      );
+    );
   }
 }
 
