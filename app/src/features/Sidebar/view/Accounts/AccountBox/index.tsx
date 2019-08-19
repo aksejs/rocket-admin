@@ -1,7 +1,7 @@
 import * as React from 'react';
 import LastOperation from './LastOperation';
-import { Link } from 'react-router-dom';
-import { Account } from '@features/Sidebar/types';
+import { connect } from 'react-redux';
+import { push } from "connected-react-router";
 import { toSpaced, convertUnixTime } from 'app/utils';
 import { 
     Wrapper,
@@ -14,13 +14,14 @@ import {
     StyledExpand
 } from './styles';
 
-const AccountBox: React.FC<Account> = ({ 
+const AccountBox: React.FC<any> = ({ 
     number, 
     balance, 
     currency,
     annual,
     created,
-    last_operation
+    last_operation,
+    push
 }) => {
     const spacedBalance = toSpaced(Math.round(balance).toString());
     const createdDate = convertUnixTime(created);
@@ -46,13 +47,11 @@ const AccountBox: React.FC<Account> = ({
                     }
                 </DescriptionBlock>
                 { isShowLastOperation && 
-                    <Link to={`/chat/accounts/${number}`}>
-                        <StyledExpand />
-                    </Link>
+                    <StyledExpand onClick={() => push(`/chat/accounts/${number}`)} />
                 }
             </InfoWrapper>
         </Wrapper>
     );
 }
 
-export default AccountBox;
+export default connect(null, { push })(AccountBox);

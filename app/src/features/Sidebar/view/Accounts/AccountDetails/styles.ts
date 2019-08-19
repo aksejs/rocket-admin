@@ -11,6 +11,9 @@ export const Wrapper = styled.div`
 
 export const CurrentAccountWrapper = styled.div`
     display: flex;
+    & > div {
+        margin: 0;
+    }
 `;
 
 export const HistoryWrapper = styled.div`
@@ -63,4 +66,19 @@ export const CompanyLogo = styled.img`
 
 export const HistoryTitle = styled(DescriptionText)`
     margin: 30px 0;
+`;
+
+export const CircledIcon = styled.div`
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
 `;

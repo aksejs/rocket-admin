@@ -40,9 +40,11 @@ export const SendButton = styled.button`
     height: 24px;
     padding: 0;
     cursor: pointer;
+    align-self: flex-end;
 `;
 
 export const InputsWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
 `;
