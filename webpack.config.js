@@ -13,6 +13,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+const BASEPATH = process.env.BASEPATH || '/';
+const CLIENT_HOST = process.env.CLIENT_HOST || 'localhost';
+const CLIENT_PORT = process.env.CLIENT_PORT || '4000';
 
 module.exports = {
   context: sourcePath,
@@ -23,7 +26,7 @@ module.exports = {
     path: outPath,
     filename: isProduction ? '[contenthash].js' : '[hash].js',
     chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
-    publicPath: '/'
+    publicPath: BASEPATH
   },
   target: 'web',
   resolve: {
@@ -130,8 +133,8 @@ module.exports = {
       },
     },
     stats: 'minimal',
-    host: 'localhost',
-    port: '4000',
+    host: CLIENT_HOST,
+    port: CLIENT_PORT,
     clientLogLevel: 'warning'
   },
   // https://webpack.js.org/configuration/devtool/
