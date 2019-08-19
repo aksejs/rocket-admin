@@ -10,15 +10,15 @@ export const setSocket = (data:any) => action(FrontStateActionTypes.SET_SOCKET, 
 
 export const initializeSockets = (socket:any) => (dispatch:any) => {
     socket.on('connect', () => {
-        socket.emit('msg history');
+        socket.emit('MESSAGE_INIT_HISTORY');
     });
-    socket.on('msg to client', (message: any) => {
+    socket.on('MESSAGE_TO_CLIENT', (message: any) => {
         dispatch(setNewMessage(message));
     });
 };
 
 export const loadInitialMessages = (socket: any) => (dispatch: any) => {
-    socket.on('msg history', ({ messages }: any) => {
+    socket.on('MESSAGE_INIT_HISTORY', ({ messages }: any) => {
         dispatch(setMessages(messages));
     });
 };

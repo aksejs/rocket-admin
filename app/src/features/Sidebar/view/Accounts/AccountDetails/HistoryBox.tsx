@@ -26,7 +26,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
 }) => {
   const lastCarriedOutDate = convertUnixTime(carriedOut);
   const handleSendMessage = () => {
-    socket.emit('message to server', {
+    socket.emit('MESSAGE_TO_SERVER', {
       isClient: false,
       message: amount,
       timeStamp: new Date().getTime() / 1000 | 0,

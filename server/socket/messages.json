@@ -29,6 +29,12 @@
         "type": "sticker",
         "timestamp": 1493695200,
         "stickerIndex": 8
+      },
+      {
+        "isClient": true,
+        "message": "Привет, ребята, снова проблемка, есть время?",
+        "timestamp": 1493695500,
+        "type": "message"
       }
     ]
   }
