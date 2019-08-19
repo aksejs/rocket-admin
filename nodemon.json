@@ -1,8 +1,8 @@
 {
   "events": {
-    "start": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)",
-    "restart": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)",
-    "crash": "kill $(lsof -t -i:8080) && kill $(lsof -t -i:8081)"
+    "restart": "kill-port 8080",
+    "crash": "kill-port 8080"
   },
+  "watch": ["server/"],
   "delay": "1500"
 }

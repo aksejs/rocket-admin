@@ -21,6 +21,7 @@
       "app/*": ["./src/*"],
       "@features/*": ["./src/features/*"],
       "@styles/*": ["./src/styles/*"],
+      "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./assets/*"],
       "@api/*" : ["./src/api/*"],
       "@common/*" : ["./src/common/*"],

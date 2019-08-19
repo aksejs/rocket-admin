@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Chat from 'app/pages/Chat';
-import MainPage from 'app/pages/MainPage';
+import Chat from '@pages/Chat';
+import MainPage from '@pages/MainPage';
 
 const routes = (
     <Switch>
