@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
       })}, 10300);
   });
   socket.on('message to server', (message) => {
-    if (message.type === 'message' && message.message.toLowerCase().includes('проблема')) {
+    if (message.type === 'message' && message.message.toLowerCase().includes('проблем')) {
       clearTimeout(greetingMessageTimerId);
       messagePosition = 0;
     }
@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('msg to client', {
           isClient: true,
           type: 'message',
-          message: "В общем проблема такая, не могу найти на сколько я последний раз поел в маке..",
+          message: "Проблемка такая, не могу найти на сколько я последний раз поел в маке..",
           timestamp: new Date().getTime() / 1000 | 0
         })
         messagePosition = 2;
@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
           io.sockets.emit('msg to client', {
             isClient: true,
             type: 'message',
-            message: "Не, это че-то не то. Я тогда еще вроде в дикси закупился плотно.",
+            message: "Это же не макдак",
             timestamp: new Date().getTime() / 1000 | 0
           })
         }, 3000);
