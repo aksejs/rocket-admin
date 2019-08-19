@@ -56,3 +56,4 @@ interface SocketManager {
 	on(ns: string, fn: Function): SocketManager;
 	sockets: SocketNamespace;
 }
+declare var ASSETS_PATH: string;

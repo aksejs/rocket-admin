@@ -19,7 +19,7 @@ const OperationMessage: React.FC<OperationBoxProps> = ({
   return (
     <Wrapper key={timestamp}>
       <MessageBox isClient={isClient}>
-        <CompanyLogo src={`../../assets/img/company-logos/merchant-${operationCode}@2x.png`} />
+        <CompanyLogo src={`/assets/img/company-logos/merchant-${operationCode}@2x.png`} />
         <p>{name}</p>
         <Amount>
           {positive ? '+' : '-'}

@@ -18,7 +18,7 @@ const Sticker: React.FC<{
 
   return (
     <StyledSticker
-      src={`../../assets/img/stickers/pepe_frog${index}.png`}
+      src={`/assets/img/stickers/pepe_frog${index}.png`}
       onClick={() => handleSendMessage()}
     />
   );
