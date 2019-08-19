@@ -64,9 +64,9 @@ class ChatHistory extends React.Component<any> {
             );
           case 'sticker':
             return (
-              <StickerMessageWrapper isClient={isClient}>
+              <StickerMessageWrapper key={timestamp} isClient={isClient}>
                 <img
-                  src={`http://localhost:4000/assets/img/stickers/pepe_frog${stickerIndex}.png`}
+                  src={`/assets/img/stickers/pepe_frog${stickerIndex}.png`}
                 />
               </StickerMessageWrapper>
             );

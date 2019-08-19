@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { handleActions } from 'redux-actions';
 import { FronState, FrontStateActionTypes } from '../types';
 
 const initialState: FronState = {
@@ -6,18 +7,9 @@ const initialState: FronState = {
   scenarioStage: 1
 }
 
-const reducer: Reducer<FronState> = (state = initialState, action) => {
-  switch (action.type) {
-    case FrontStateActionTypes.SET_SOCKET: {
-      return { ...state, socket: action.payload }
-    }
-    case FrontStateActionTypes.SET_SCENARIO_ID: {
-      return { ...state, scenarioStage: action.payload }
-    }
-    default: {
-      return state
-    }
-  }
-}
+const reducer: Reducer<FronState> = handleActions<any, any>({
+  [FrontStateActionTypes.SET_SOCKET]: (state, { payload }) => ({ ...state, socket: payload }),
+  [FrontStateActionTypes.SET_SCENARIO_ID]: (state, { payload }) => ({ ...state, scenarioStage: payload })
+}, initialState)
 
 export { reducer as frontStateReducer };

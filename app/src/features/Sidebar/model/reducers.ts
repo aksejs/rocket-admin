@@ -1,23 +1,15 @@
-import { Reducer } from 'redux'
-import { ControlPanelState, ControlPannelActionTypes } from '../types'
+import { Reducer } from 'redux';
+import { handleActions } from 'redux-actions';
+import { ControlPanelState, ControlPannelActionTypes } from '../types';
 
 const initialState: ControlPanelState = {
   deposits: [],
   accounts: []
 }
 
-const reducer: Reducer<ControlPanelState> = (state = initialState, action) => {
-  switch (action.type) {
-    case ControlPannelActionTypes.GET_DEPOSITS: {
-      return { ...state, deposits: action.payload }
-    }
-    case ControlPannelActionTypes.SET_ACCOUNTS: {
-      return { ...state, accounts: action.payload }
-    }
-    default: {
-      return state
-    }
-  }
-}
+const reducer: Reducer<ControlPanelState> = handleActions<any, any>({
+  [ControlPannelActionTypes.GET_DEPOSITS]: (state, { payload }) => ({ ...state, deposits: payload }),
+  [ControlPannelActionTypes.SET_ACCOUNTS]: (state, { payload }) => ({ ...state, accounts: payload })
+}, initialState)
 
 export { reducer as controlPanelReducer };
