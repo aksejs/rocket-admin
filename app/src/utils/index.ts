@@ -65,5 +65,5 @@ const debounce_ = R.curry((immediate, timeMs, fn) => () => {
 export const debounce = debounce_(false);
 
 export const sendToSocket = R.curry((socket, message) => {
-	return socket.emit('message to server', message);
+	return socket.emit('MESSAGE_TO_SERVER', message);
 });

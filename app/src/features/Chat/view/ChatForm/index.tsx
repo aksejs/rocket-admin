@@ -24,7 +24,7 @@ class ChatForm extends React.Component<
     event.preventDefault();
     const { socket } = this.props;
     if (socket) {
-      socket.emit('message to server', {
+      socket.emit('MESSAGE_TO_SERVER', {
         isClient: false,
         message: this.state.value,
         timestamp: (new Date().getTime() / 1000) | 0,
