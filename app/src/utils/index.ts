@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { HistoryDetail } from '@features/Sidebar/types';
+import { MessageType } from '@features/Chat/types';
 
 export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys: K[]): Omit<T, K> {
   return (Object.keys(target) as K[]).reduce(
@@ -14,17 +15,17 @@ export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys
 }
 
 export const sortByDate = (details: Array<HistoryDetail>) => {
-	return details.sort((a, b) => b.carriedOut - a.carriedOut)
+  return details.sort((a, b) => b.carriedOut - a.carriedOut);
 };
 
 export function toSpaced(value: string) {
-  return value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-};
+  return value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
 
 export function convertUnixTime(UNIXtimestamp: number, locale: string = 'ru-RU') {
   const a = new Date(UNIXtimestamp * 1000);
-  return a.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric'});
-};
+  return a.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+}
 
 /**
  * Debounce
@@ -38,32 +39,47 @@ export function convertUnixTime(UNIXtimestamp: number, locale: string = 'ru-RU')
  */
 
 const debounce_ = R.curry((immediate, timeMs, fn) => () => {
-	let timeout:any;
+  let timeout: any;
 
-	return (...args:any) => {
-		const later = () => {
-			timeout = null;
+  return (...args: any) => {
+    const later = () => {
+      timeout = null;
 
-			if (!immediate) {
-				R.apply(fn, args);
-			}
-		};
+      if (!immediate) {
+        R.apply(fn, args);
+      }
+    };
 
-		const callNow = immediate && !timeout;
+    const callNow = immediate && !timeout;
 
-		clearTimeout(timeout);
-		timeout = setTimeout(later, timeMs);
+    clearTimeout(timeout);
+    timeout = setTimeout(later, timeMs);
 
-		if (callNow) {
-			R.apply(fn, args);
-		}
+    if (callNow) {
+      R.apply(fn, args);
+    }
 
-		return timeout;
-	};
+    return timeout;
+  };
 });
 
 export const debounce = debounce_(false);
 
 export const sendToSocket = R.curry((socket, message) => {
-	return socket.emit('MESSAGE_TO_SERVER', message);
+  return socket.emit('MESSAGE_TO_SERVER', message);
 });
+
+export const detectStage = (messages) => {
+  const lastMessage = messages.filter(({ isClient }: MessageType) => isClient).slice(-1)[0];
+  if (lastMessage) {
+    switch (lastMessage.message) {
+      case 'Привет, ребята, снова проблемка, есть время?':
+        return 1;
+      case 'То, что надо, спасибо!':
+        return 3;
+      default:
+        return 2;
+    }
+  }
+  return 1;
+};

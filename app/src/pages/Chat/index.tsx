@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
-import { setSocket, loadInitialMessages, initializeSockets } from '@common/actions';
+import { setSocket, loadInitialMessages, initializeSockets, sendScenarioId } from '@common/actions';
 import { SOCKET_URL } from '@utils/constants';
 import { ChatView } from '@features/Chat';
+import { MessageType } from '@features/Chat/types';
 import SideBarView from '@features/Sidebar/view';
 
 import { Wrapper } from './styles';
@@ -15,6 +16,7 @@ class ChatPage extends React.Component<any> {
       setSocket,
       loadInitialMessages,
       initializeSockets,
+      sendScenarioId,
       chat: { messages },
       persist: { rehydrated = false }
     } = this.props;
@@ -27,6 +29,7 @@ class ChatPage extends React.Component<any> {
     if (!isMessagesRehydrated) {
       loadInitialMessages(socket);
     }
+    sendScenarioId(socket, messages);
   }
 
   componentWillUnmount() {
@@ -51,6 +54,7 @@ export default connect(
   (dispatch) => ({
     setSocket: (socket: SocketIOClient.Socket) => dispatch(setSocket(socket)),
     initializeSockets: (socket: SocketIOClient.Socket) => initializeSockets(socket)(dispatch),
-    loadInitialMessages: (socket: SocketIOClient.Socket) => loadInitialMessages(socket)(dispatch)
+    loadInitialMessages: (socket: SocketIOClient.Socket) => loadInitialMessages(socket)(dispatch),
+    sendScenarioId: (socket: SocketIOClient.Socket, messages: Array<MessageType>) => sendScenarioId(socket, messages)(dispatch)
   })
 )(ChatPage);

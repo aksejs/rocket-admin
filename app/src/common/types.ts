@@ -1,9 +1,11 @@
 export interface FronState {
-    socket: any
+    socket: any,
+    scenarioStage: number
 };
 
 export enum FrontStateActionTypes {
-    SET_SOCKET = '@FRONT_STATE/SET_SOCKET'
+    SET_SOCKET = '@FRONT_STATE/SET_SOCKET',
+    SET_SCENARIO_ID = '@FRONT_STATE/SET_SCENARIO_ID'
 };
 
 export interface AccountListRequest {
