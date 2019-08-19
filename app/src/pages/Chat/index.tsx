@@ -9,41 +9,41 @@ import SideBarView from '@features/Sidebar/view';
 
 import { Wrapper } from './styles';
 
-let socket: SocketIOClient.Socket;
-class ChatPage extends React.Component<any> {
-  componentDidMount() {
-    const {
-      setSocket,
-      loadInitialMessages,
-      initializeSockets,
-      sendScenarioId,
-      chat: { messages },
-      persist: { rehydrated = false }
-    } = this.props;
+const ChatPage: React.FC<any> = ({
+  setSocket,
+  initializeSockets,
+  loadInitialMessages,
+  sendScenarioId,
+  persist: {
+    rehydrated = false
+  }, 
+  chat: {
+    messages
+  }
+}) => {
+  const [socket, ] = React.useState<SocketIOClient.Socket>(io.connect(SOCKET_URL));
 
+  //todo: Переписать в кастомный хук useSocket()
+  React.useEffect(() => {
     const isMessagesRehydrated = rehydrated && messages.length;
-
-    socket = io.connect(SOCKET_URL);
     setSocket(socket);
     initializeSockets(socket);
     if (!isMessagesRehydrated) {
       loadInitialMessages(socket);
     }
     sendScenarioId(socket, messages);
-  }
 
-  componentWillUnmount() {
-    socket.disconnect();
-  }
+    return () => {
+      socket.disconnect();
+    }
+  }, [])
 
-  render() {
-    return (
-      <Wrapper>
-        <ChatView />
-        <SideBarView />
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+         <ChatView />
+         <SideBarView />
+    </Wrapper>
+  )
 }
 
 export default connect(

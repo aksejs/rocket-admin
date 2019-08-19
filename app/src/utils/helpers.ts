@@ -69,7 +69,7 @@ export const sendToSocket = R.curry((socket, message) => {
   return socket.emit('MESSAGE_TO_SERVER', message);
 });
 
-export const detectStage = (messages) => {
+export const detectStage = (messages: MessageType[]) => {
   const lastMessage = messages.filter(({ isClient }: MessageType) => isClient).slice(-1)[0];
   if (lastMessage) {
     switch (lastMessage.message) {

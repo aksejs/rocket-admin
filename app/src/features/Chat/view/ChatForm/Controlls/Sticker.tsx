@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { StyledSticker } from './styles';
-import { sendToSocket } from 'app/utils';
+import { sendToSocket } from '@utils/helpers';
 
 const Sticker: React.FC<{
   index: string;
@@ -24,6 +24,6 @@ const Sticker: React.FC<{
   );
 };
 
-export default connect((state) => ({
-  socket: state.frontState.socket
+export default connect(({ frontState }) => ({
+  socket: frontState.socket
 }))(Sticker);

@@ -5,34 +5,23 @@ import Message from './Message';
 import Operation from './Operation';
 import { Wrapper, StickerMessageWrapper } from './styles';
 
-class ChatHistory extends React.Component<any> {
-  private historyRef = React.createRef<HTMLDivElement>();
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      messages: [{ isClient: false, message: 'Hello' }, { isClient: true, message: 'Hi' }]
-    };
-  }
-
-  scrollToCurrentMessage = () => {
-    if (this.historyRef.current) {
-      this.historyRef.current.scrollTop = this.historyRef.current.scrollHeight;
+const ChatHistory: React.FC<{ messages?: MessageType[] }> = ({ messages = [] }) => {
+  const historyRef = React.useRef<HTMLDivElement | null>(null);
+  const scrollToCurrentMessage = () => {
+    if (historyRef && historyRef.current) {
+      historyRef.current.scrollTop = historyRef.current.scrollHeight;
     }
   };
 
-  componentDidMount = () => {
-    this.scrollToCurrentMessage();
-  };
+  React.useEffect(() => {
+    scrollToCurrentMessage();
+  }, []);
 
-  componentDidUpdate = (prevProps: any) => {
-    if (prevProps.messages.length !== this.props.messages.length) {
-      this.scrollToCurrentMessage();
-    }
-  };
+  React.useEffect(() => {
+    scrollToCurrentMessage();
+  }, [messages.length]);
 
-  renderMessages = () => {
-    const messages: MessageType[] = this.props.messages;
-
+  const renderMessages = () => {
     if (!messages.length) {
       return null;
     }
@@ -65,9 +54,7 @@ class ChatHistory extends React.Component<any> {
           case 'sticker':
             return (
               <StickerMessageWrapper key={timestamp} isClient={isClient}>
-                <img
-                  src={`/assets/img/stickers/pepe_frog${stickerIndex}.png`}
-                />
+                <img src={`/assets/img/stickers/pepe_frog${stickerIndex}.png`} />
               </StickerMessageWrapper>
             );
           default:
@@ -77,14 +64,12 @@ class ChatHistory extends React.Component<any> {
     );
   };
 
-  render() {
-    return (
-        <Wrapper ref={this.historyRef}>
-            {this.renderMessages()}
-        </Wrapper>
+  return (
+    <Wrapper ref={historyRef}>
+      {renderMessages()}
+    </Wrapper>
     );
-  }
-}
+};
 
 export default connect(({ chat }) => ({
   messages: chat.messages

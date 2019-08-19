@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { convertUnixTime } from 'app/utils';
+import { convertUnixTime } from '@utils/helpers';
 import { HistoryDetail } from '@features/Sidebar/types';
 import { 
     HistoryBoxWrapper, 
@@ -42,7 +42,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
   return (
     <HistoryBoxWrapper>
       <BoxContentWrapper>
-        <CompanyLogo src={`../../assets/img/company-logos/merchant-${operationCode}@2x.png`}/>
+        <CompanyLogo src={`/assets/img/company-logos/merchant-${operationCode}@2x.png`}/>
         <BoxDescription>
             <p>{name}</p>
             <DescriptionText>{lastCarriedOutDate}</DescriptionText>

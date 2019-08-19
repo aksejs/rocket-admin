@@ -2,64 +2,48 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import SendIcon from '@assets/svg/ico-send.svg';
 import Controlls from './Controlls';
-import { 
-	Wrapper, 
-	StyledForm, 
-	StyledInput, 
-	SendButton, 
-	InputsWrapper 
-} from './styles';
+import { Wrapper, StyledForm, StyledInput, SendButton, InputsWrapper } from './styles';
 
-class ChatForm extends React.Component<
-{ socket?: SocketIOClient.Socket }, 
-{ value: string }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      value: ''
-    };
-  }
+const ChatForm: React.FC<{ socket?: SocketIOClient.Socket }> = ({ socket }) => {
+  const [value, setValue] = React.useState<string>('');
 
-  handleSumbit = (event: any) => {
+  const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+  //todo: Refactor types
+  const handleSumbit = (event: any) => {
     event.preventDefault();
-    const { socket } = this.props;
     if (socket) {
       socket.emit('MESSAGE_TO_SERVER', {
         isClient: false,
-        message: this.state.value,
+        message: value,
         timestamp: (new Date().getTime() / 1000) | 0,
         type: 'message'
       });
     }
-    this.setState({ value: '' });
+    setValue('');
   };
 
-  handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: event.target.value });
-  };
+  return (
+    <Wrapper>
+      <StyledForm>
+        <InputsWrapper>
+          <Controlls />
+          <StyledInput
+            type="text"
+            value={value}
+            onChange={handleChangeValue}
+            placeholder="Введите сообщение..."
+          />
+        </InputsWrapper>
+        <SendButton onClick={handleSumbit}>
+          <SendIcon />
+        </SendButton>
+      </StyledForm>
+    </Wrapper>
+  );
+};
 
-  render() {
-    return (
-      <Wrapper>
-        <StyledForm>
-          <InputsWrapper>
-            <Controlls />
-            <StyledInput
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChangeValue}
-              placeholder="Введите сообщение..."
-            />
-          </InputsWrapper>
-          <SendButton onClick={this.handleSumbit}>
-            <SendIcon />
-          </SendButton>
-        </StyledForm>
-      </Wrapper>
-    );
-  }
-}
-
-export default connect((state) => ({
-  socket: state.frontState.socket
+export default connect(({ frontState }) => ({
+  socket: frontState.socket
 }))(ChatForm);
