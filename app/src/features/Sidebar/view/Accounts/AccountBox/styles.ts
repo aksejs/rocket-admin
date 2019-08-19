@@ -11,6 +11,7 @@ export const InfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+    flex-grow: 1;
 `;
 
 export const AccountNumber = styled.p`
@@ -20,6 +21,7 @@ export const AccountNumber = styled.p`
 
 export const Amount = styled.p`
     font-size: 14px;
+    font-family: SFUIDisplay-Bold;
 `;
 
 export const DescriptionBlock = styled.div`
@@ -48,4 +50,5 @@ export const StyledExpand = styled(IconExpand)`
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 `;

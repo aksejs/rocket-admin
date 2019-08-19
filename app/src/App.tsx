@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 // import { History } from 'history';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { setSocket, loadInitialMessages, initializeSockets } from 'app/main/actions';
+import { setSocket, loadInitialMessages, initializeSockets } from 'app/common/actions';
 import routes from './routes';
 import { SOCKET_URL } from 'app/utils/constants';
 

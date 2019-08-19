@@ -2,9 +2,17 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { getAccount } from '@api/requests';
 import { Account, HistoryDetail } from '@features/Sidebar/types';
+import IconCross from '@assets/svg/ico-cross.svg';
 import AccountBox from '../AccountBox';
 import HistoryBox from './HistoryBox';
-import { Wrapper, CurrentAccountWrapper, HistoryWrapper, HistoryTitle } from './styles';
+import Loader from './Loader';
+import {
+  Wrapper,
+  CurrentAccountWrapper,
+  HistoryWrapper,
+  HistoryTitle,
+  CircledIcon
+} from './styles';
 
 interface MatchParams {
   productId: string;
@@ -41,28 +49,32 @@ class AccountDetails extends React.Component<MatchProps, IState> {
       );
     }
   }
+
   renderAccountDetail = () => {
     const { account, history } = this.state;
     if (account && history) {
       return (
-        <Wrapper>
+        <>
           <CurrentAccountWrapper>
             <AccountBox {...account} />
+            <CircledIcon onClick={() => this.props.history.push('/chat/accounts/')}>
+              <IconCross />
+            </CircledIcon>
           </CurrentAccountWrapper>
           <HistoryWrapper>
-              <HistoryTitle>История операций</HistoryTitle>
-              {history.map((historyDetail: HistoryDetail) => (
-                  <HistoryBox key={historyDetail.carriedOut} {...historyDetail}/>
-              ))}
+            <HistoryTitle>История операций</HistoryTitle>
+            {history.map((historyDetail: HistoryDetail) => (
+              <HistoryBox key={historyDetail.carriedOut} {...historyDetail} />
+            ))}
           </HistoryWrapper>
-        </Wrapper>
+        </>
       );
     }
-    return <div>Error</div>
+    return <div>Error</div>;
   };
   render() {
     const { isLoaded } = this.state;
-    return <Wrapper>{isLoaded ? this.renderAccountDetail() : <div>Loading...</div>}</Wrapper>;
+    return <Wrapper>{isLoaded ? this.renderAccountDetail() : <Loader />}</Wrapper>;
   }
 }
 

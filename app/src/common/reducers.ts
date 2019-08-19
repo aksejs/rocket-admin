@@ -8,8 +8,8 @@ import { ChatState } from '@features/Chat/types';
 import { ControlPanelState } from '@features/Sidebar/types';
 import { controlPanelReducer } from '@features/Sidebar/model/reducers';
 
-import { FronState } from 'app/main/types';
-import { frontStateReducer } from 'app/main/reducers/frontReducer';
+import { FronState } from 'app/common/types';
+import { frontStateReducer } from 'app/common/reducers/frontReducer';
 
 export interface ApplicationState {
   chat: ChatState

@@ -7,15 +7,16 @@ export const Wrapper = styled.div`
     width: 32%;
     height: 100vh;
     overflow: scroll;
-    min-width: 400;
-    padding: 60px 60px;
-    background-color: ${({ theme }) => theme.white_smoke(1)}
+    min-width: 400px;
+    padding: 60px;
+    background-color: ${({ theme }) => theme.white_smoke(1)};
+    position: relative;
 `;
 
 export const Tabs = styled.div`
     display: flex;
-    margin-bottom: 30px;
     font-size: 24px;
+    font-family: SFUIDisplay-Bold;
 `;
 
 export const Tab = styled(NavLink)`

@@ -11,6 +11,13 @@ export const GeneralStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'SFUIDisplay-Bold';
+    src: 
+      url('http://localhost:4000/assets/fonts/SFUDisplay/bold/SFUIDisplay-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+  }
   html {
     height: 100%;
     width: 100%;
