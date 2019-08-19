@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as __ from 'lodash';
-import { Wrapper, StickersPlateWrapper } from './styles';
 import Sticker from './Sticker';
+import { Wrapper, StickersPlateWrapper } from './styles';
 
 import TextIcon from '@assets/svg/ico-text.svg';
 import StickerIcon from '@assets/svg/ico-sticker.svg';
 import PictureIcon from '@assets/svg/ico-picture.svg';
 import AttachIcon from '@assets/svg/ico-attach.svg';
 
-class Controlls extends React.Component<any, any> {
+class Controlls extends React.Component<any, {isShowStickerPlate: boolean}> {
   constructor(props:any) {
       super(props);
       this.state = {

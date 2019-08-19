@@ -11,7 +11,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "outDir": "build",
     "lib": ["es6", "es7", "dom"],
     "baseUrl": "app",
@@ -22,7 +22,9 @@
       "@features/*": ["./src/features/*"],
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./assets/*"],
-      "@api/*" : ["./src/api/*"]
+      "@api/*" : ["./src/api/*"],
+      "@common/*" : ["./src/common/*"],
+      "@utils/*" : ["./src/utils/*"]
     }
   },
   "exclude": ["build", "node_modules"]

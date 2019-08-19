@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Wrapper, StickerMessageWrapper } from './styles';
+import { MessageType } from '@features/Chat/types';
 import Message from './Message';
 import Operation from './Operation';
-import { MessageType } from '../../types';
+import { Wrapper, StickerMessageWrapper } from './styles';
 
 class ChatHistory extends React.Component<any> {
   private historyRef = React.createRef<HTMLDivElement>();
