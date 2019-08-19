@@ -5,9 +5,9 @@
   "description": "Test task for @RocketBank",
   "main": "App.js",
   "scripts": {
-    "predeploy": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"webpack-dev-server --mode development --hot --color --open \" \"nodemon ./server\"",
+    "client": "webpack-dev-server --mode development --hot",
+    "server": "nodemon ./server/index.js",
+    "dev": "concurrently -p \"[{name}]\" -n \"client,server\" -c \"bgMagenta.bold,bgBlue.bold\" \"yarn client\" \"yarn server\"",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"app/**/*.{ts,tsx,css}\""
   },
