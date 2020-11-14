@@ -14,7 +14,7 @@ export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys
   );
 }
 
-export const sortByDate = (details: Array<HistoryDetail>) => {
+export function sortByDate(details: Array<HistoryDetail>) {
   return details.sort((a, b) => b.carriedOut - a.carriedOut);
 };
 
@@ -30,9 +30,9 @@ export function convertUnixTime(UNIXtimestamp: number, locale: string = 'ru-RU')
 /**
  * Debounce
  *
- * @param {Boolean} immediate If true run `fn` at the start of the timeout
- * @param  timeMs {Number} Debounce timeout
- * @param  fn {Function} Function to debounce
+ * @param immediate {Boolean} If true run `fn` at the start of the timeout
+ * @param timeMs {Number} Debounce timeout
+ * @param fn {Function} Function to debounce
  *
  * @return {Number} timeout
  *

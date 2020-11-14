@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { History } from 'history'
 import { connectRouter, RouterState } from 'connected-react-router'
 
-import { chatReducer } from '@features/Chat/model/reducers';
+import { chatReducer } from '@features/Chat';
 import { ChatState } from '@features/Chat/types';
 
+import { controlPanelReducer } from '@features/Sidebar';
 import { ControlPanelState } from '@features/Sidebar/types';
-import { controlPanelReducer } from '@features/Sidebar/model/reducers';
 
 import { FronState } from '@common/types';
 import { frontStateReducer } from '@common/reducers/frontReducer';

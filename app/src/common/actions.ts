@@ -9,13 +9,14 @@ export const setSocket = (data: any) => action(FrontStateActionTypes.SET_SOCKET,
 export const setScenarioId = (data: any) => action(FrontStateActionTypes.SET_SCENARIO_ID, data);
 
 /***************************************************************************************** */
-/* Async Action Thunks using - Sockets													   */
+/* Async Action Thunks using - Sockets													                           */
 /***************************************************************************************** */
 
 export const initializeSockets = (socket: any) => (dispatch: any) => {
   socket.on('connect', () => {
     socket.emit('MESSAGE_INIT_HISTORY');
   });
+
   socket.on('MESSAGE_TO_CLIENT', (message: any) => {
     dispatch(setNewMessage(message));
   });

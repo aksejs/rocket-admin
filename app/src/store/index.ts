@@ -24,9 +24,7 @@ export function configureStore(initialState?: ApplicationState): Store<Applicati
     middleware = composeWithDevTools(middleware);
   }
 
-  let store = createStore(persistedReducer, middleware) as Store<
-    ApplicationState
-  >;
+  let store = createStore(persistedReducer, middleware) as Store<ApplicationState>;
 
   if (module.hot) {
     module.hot.accept('@common/rootReducer', () => {

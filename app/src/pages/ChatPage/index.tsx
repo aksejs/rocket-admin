@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import { setSocket, loadInitialMessages, initializeSockets, sendScenarioId } from '@common/actions';
 import { SOCKET_URL } from '@utils/constants';
+
 import { ChatView } from '@features/Chat';
+import { SideBarView } from '@features/Sidebar';
 import { MessageType } from '@features/Chat/types';
-import SideBarView from '@features/Sidebar/view';
 
 import { Wrapper } from './styles';
 
@@ -26,8 +27,10 @@ const ChatPage: React.FC<any> = ({
   //todo: Переписать в кастомный хук useSocket()
   React.useEffect(() => {
     const isMessagesRehydrated = rehydrated && messages.length;
+    
     setSocket(socket);
     initializeSockets(socket);
+
     if (!isMessagesRehydrated) {
       loadInitialMessages(socket);
     }

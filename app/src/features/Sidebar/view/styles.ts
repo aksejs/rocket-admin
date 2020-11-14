@@ -22,9 +22,11 @@ export const Tabs = styled.div`
 export const Tab = styled(NavLink)`
     margin-right: 30px;
     color: ${({ theme }) => theme.spanish_gray(1)};
+    pointer-events: none;
     cursor: default;
     &.active {
         color: ${({ theme }) => theme.dark};
         cursor: pointer;
+        pointer-events: auto;
     }
 `;
